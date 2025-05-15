@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de FIlmes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style: nome;
+            padding: 0;
+        }
+        li {
+            background: #f2f2f2;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de filmes </h1>
+    <ul id="lista-filmes"></ul>
+
+    <script>
+        const url = 'https://probable-telegram-5gg44qr6q47pfp7vp-3000.app.github.dev/filmes';
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const lista = document.getElementById('lista-filmes');
+                data.forEach(filme => {
+                    const item = document.createElement('li');
+                    item.innerHTML = `<strong>${filme.titulo}</strong> (${filme.ano}) - ${filme.genero}`;
+                    lista.appendChild(item);
+                });
+            })
+            .catch(error => {
+                console.error('Error ao buscar filmes:', error);
+            });
+    </script>
+</body>
+</html>
